@@ -1,15 +1,45 @@
 <?php
 
 require_once("config.php");
-// $sql = new Sql();
+/*
+//Mostrar a Tabela
+    $sql = new Sql();
+    $usuarios = $sql->select("SELECT * FROM tb_usuario");
+    echo json_encode($usuarios);
+*/
+/*
+//Carregar 1 Usuario apenas
 
-// $usuarios = $sql->select("SELECT * FROM tb_usuario");
+    $root = new Usuario();
+    $root->carregarId(2);
+    echo $root;
+*/
+/*
+//Carrega uma lista de usuários
+    
+    $lista = Usuario::getList();
+    echo json_encode($lista);
+*/
 
-// echo json_encode($usuarios);
+/*
+//Para pesquisar o Usuario! pode ser até simplificado por causa do banco e seu comando %%
+    $search = Usuario::Pesquisar("de");
+    echo json_encode($search)
 
-$root = new Usuario();
+ */
+/* 
+ //Verificação de Login
+$usuarioTeste = new Usuario();
 
-$root->carregarId(2);
+ $usuarioTeste->login("Deyvid","12345"); //Passar os parametros(os dados de login);
 
-echo $root;
+ echo $usuarioTeste;
+*/
+
+$aluno = new Usuario("aluno", "222");
+
+$aluno->insert();
+
+echo $aluno;
+
 ?>
