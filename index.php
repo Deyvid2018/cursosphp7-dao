@@ -1,6 +1,8 @@
 <?php
 
-require_once("config.php");
+declare(strict_types=1);
+
+require_once 'config.php';
 /*
 //Mostrar a Tabela
     $sql = new Sql();
@@ -16,7 +18,7 @@ require_once("config.php");
 */
 /*
 //Carrega uma lista de usuários
-    
+
     $lista = Usuario::getList();
     echo json_encode($lista);
 */
@@ -27,7 +29,7 @@ require_once("config.php");
     echo json_encode($search)
 
  */
-/* 
+/*
  //Verificação de Login
 $usuarioTeste = new Usuario();
 
@@ -36,10 +38,8 @@ $usuarioTeste = new Usuario();
  echo $usuarioTeste;
 */
 
-$aluno = new Usuario("aluno", "222");
+$aluno = new Usuario('aluno', '222');
 
 $aluno->insert();
 
 echo $aluno;
-
-?>
