@@ -106,10 +106,10 @@ class Usuario{
     public function setDados($dados){
           
         //Se a variável estiver certa "result" já passo os dados por aqui mesmo!
-          $this->setIdusuario($row['idUsuario']);
-          $this->setDeslogin($row['desLogin']);
-          $this->setDessenha($row['desSenha']);
-          $this->setDtcadastro(new DateTime($row['dtCadastro'])); //Para ficar em um formado melhor usando a função hora
+          $this->setIdusuario($dados['idUsuario']);
+          $this->setDeslogin($dados['desLogin']);
+          $this->setDessenha($dados['desSenha']);
+          $this->setDtcadastro(new DateTime($dados['dtCadastro'])); //Para ficar em um formado melhor usando a função hora
     
         }
 
@@ -123,7 +123,7 @@ class Usuario{
         //DICA: Se fosse no SQL SERVER no lugar do CALL seria EXECUTE;
         $result = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
             ':LOGIN'=> $this->getDeslogin(),
-            ':PASSAWORD'=>$this->getDessenha()
+            ':PASSWORD'=>$this->getDessenha()
         ));
 
         if (isset($result[0])){
@@ -132,19 +132,33 @@ class Usuario{
         }
     } 
 
-    // public function __construct($login = "", $password = ""){
-    //     $this->setDeslogin($login);
-    //     $this->setDessenha($password);
+    public function __construct($login = "", $password = ""){
+    $this->setDeslogin($login);
+    $this->setDessenha($password);
 
-    // }
+    }
+
+    //Método de Uptade(Atualização)
+    public function update($login, $password){
+
+        $this->setDeslogin($login);
+        $this->setDessenha($password);
+        
+        $sql = new Sql();
+
+        $sql->query("UPDATE tb_usuario SET desLogin = :LOGIN, desSenha = :PASSWORD WHERE idUsuario = :ID", array(
+            ':LOGIN'=>$this->getDeslogin(),
+            ':PASSWORD'=>$this->getDessenha(),
+            ':ID'=>$this->getIdusuario()
+
+        ));
+    }
 
 
     //Chamando tudo em formado de STRING
-    //IMPORTANTE= Se não formadar para string vai da ERRO pq o idUsuario não pode ser convertido para string, só com a função toString
+    //IMPORTANTE= Se não formatar para string vai da ERRO pq o idUsuario não pode ser convertido para string, só com a função toString
     public function __toString(){
-        return json_encode(
-            array(
-
+        return json_encode(array(
                 "idUsuario"=>$this->getIdusuario(),
                 "desLogin"=>$this->getDeslogin(),
                 "dessenha"=>$this->getDessenha(),

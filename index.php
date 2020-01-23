@@ -26,20 +26,34 @@ require_once("config.php");
     $search = Usuario::Pesquisar("de");
     echo json_encode($search)
 
- */
-/* 
- //Verificação de Login
-$usuarioTeste = new Usuario();
+*/
 
- $usuarioTeste->login("Deyvid","12345"); //Passar os parametros(os dados de login);
+/* 
+//Verificação de Login
+
+$usuarioTeste = new Usuario();
+$usuarioTeste->login("Deyvid","12345"); //Passar os parametros(os dados de login);
 
  echo $usuarioTeste;
 */
 
-$aluno = new Usuario("aluno", "222");
+/*
+//A inclusão de um novo Usuario no BD
+
+$aluno = new Usuario();
+$aluno->setDeslogin("aluno");
+$aluno->setDessenha("2223");
 
 $aluno->insert();
-
 echo $aluno;
+*/
+
+$usuarios = new Usuario();
+
+$usuarios->carregarId(2);
+
+$usuarios->update("PedS","101010");
+
+echo $usuarios;
 
 ?>
